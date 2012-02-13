@@ -1,11 +1,11 @@
 
 /**
- * description: 
+ * @description: 
  *		this file is to communicate with libpackbot and publish
  *		the odometry, inclinometer, internal compass, flipper,
  * 		brake and arm readings of the packbot as a rosmsg.
  *
- * author: Aravind
+ * @author: Aravind
  */
  
 
@@ -39,23 +39,23 @@ Packbot::Messenger *packlib;
 /// this function reads the yaml file and gets the serial number of the packbot
 unsigned int read_yaml( char *yaml_file )
 {
-	std::ifstream fin( yaml_file ); 
-  if ( fin.fail() ) 
-  {
-    ROS_ERROR( "could not open %s which contains the serial number.\n", yaml_file );
-    exit(-1);
-  }
-  YAML::Parser parser( fin );   
-  YAML::Node doc;
-  parser.GetNextDocument( doc );
-  unsigned int sno;
-  try { doc["serial"] >> sno; } 
-  catch (YAML::InvalidScalar) 
-  { 
-    printf( "the yaml file, %s does not contain the serial number for packbot.", yaml_file );
-    exit(-1);
-  }
-  return sno;
+	ifstream fin( yaml_file ); 
+	if ( fin.fail() ) 
+	{
+	  ROS_ERROR( "could not open %s which contains the serial number.\n", yaml_file );
+	  exit(-1);
+	}
+	YAML::Parser parser( fin );   
+	YAML::Node doc;
+	parser.GetNextDocument( doc );
+	unsigned int sno;
+	try { doc["serial"] >> sno; } 
+	catch (YAML::InvalidScalar) 
+	{ 
+	  printf( "the yaml file, %s does not contain the serial number for packbot.", yaml_file );
+	  exit(-1);
+	}
+	return sno;
 }
 
 
