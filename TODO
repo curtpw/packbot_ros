@@ -1,0 +1,7 @@
+1)	create test code to test the this ros package.
+
+2)	use a callback method so that the packbot's state is published whenever there
+		is new data available in the libpackbot instead of the current method where
+		data is published at a constant rate.
+
+3) 	create seperate ros node/s to control the arm easily.
