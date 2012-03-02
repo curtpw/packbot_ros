@@ -201,8 +201,7 @@ int main( int argc, char **argv )
 	while( ros::ok() )
 	{	
 		g_packlib->getVelocity( v_lin, v_ang );
-		g_packlib->getPose( yaw, roll, pitch );
-		
+		g_packlib->getPose( yaw, roll, pitch );	
 		/// assign the values to the PackbotState msg datatype
 		pbs.velocity.linear		= v_lin;
 		pbs.velocity.angular	= v_ang;
@@ -213,18 +212,15 @@ int main( int argc, char **argv )
 		pbs.brakes.arm			= g_packlib->isArmBrakeEngaged();
 		pbs.flipper.position	= g_packlib->getFlipperPos();
 		pbs.flipper.velocity	= g_packlib->getFlipperVel();
-		
 		/// get the state of the packbot's arm
 		pbs.arm					= get_packbot_arm_state();
-		
 		/// create the header for the msg
 		pbs.header.seq 			= count++;
 		pbs.header.stamp 		= ros::Time::now();
 		pbs.header.frame_id 	= "packbot_frame";
-		
 		/// publish the msg
 		pbs_pub.publish( pbs );
-		
+		/// spin and sleep
 		ros::spinOnce();
 		loop_rate.sleep();
 	}
